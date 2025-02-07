@@ -4,6 +4,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ isSsrBuild }) => ({
   build: {
+    sourcemap: true,
     rollupOptions: isSsrBuild
       ? {
         input: "./server/app.ts",
