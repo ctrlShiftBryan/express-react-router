@@ -1,5 +1,3 @@
-import type { Route } from "./+types/root";
-
-export function loader({ context }: Route.LoaderArgs) {
-  return { message: context.VALUE_FROM_EXPRESS };
-}
+export function loader() {
+  throw new Response("Not Found", { status: 404 });
+} 
