@@ -1,8 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "include": [
-    "server.ts",
-    "vite.config.ts"
+    "server.ts"
   ],
   "compilerOptions": {
     "composite": true,
@@ -16,6 +15,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "moduleResolution": "bundler",
-    "outDir": "./build"
+    "outDir": "./build/expressjs",
+    "noEmit": false
   }
 }

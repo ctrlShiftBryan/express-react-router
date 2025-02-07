@@ -3,10 +3,13 @@
   "private": true,
   "type": "module",
   "packageManager": "yarn@1.22.22",
+  "license": "MIT",
   "scripts": {
-    "build": "react-router build",
-    "dev": "cross-env NODE_ENV=development node server.js",
-    "start": "node server.js",
+    "build": "npm run build:react-router && npm run build:expressjs",
+    "build:react-router": "react-router build && mkdir -p build/react-router && mv build/client build/react-router/ && mv build/server build/react-router/",
+    "build:expressjs": "tsc -p tsconfig.expressjs.json",
+    "dev": "cross-env NODE_ENV=development tsx server.ts",
+    "start": "node build/expressjs/server.js",
     "typecheck": "react-router typegen && tsc -b"
   },
   "dependencies": {
@@ -31,6 +34,7 @@
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
     "cross-env": "^7.0.3",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "vite": "^5.4.11",
     "vite-tsconfig-paths": "^5.1.4"
