@@ -1,16 +1,26 @@
-# Welcome to React Router!
+# React Router 7 Express.js API Backend
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A streamlined Express.js API backend template using React Router 7 for file-based routing. This project is a modified version of the [React Router Custom Server Template](https://github.com/remix-run/react-router-templates/tree/main/node-custom-server), stripped down to serve as a pure API backend.
 
 ## Features
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
+- 🚀 File-based API routing using React Router
+- ⚡️ Hot Module Replacement (HMR) for rapid development
 - 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- 📁 Express.js backend with React Router integration
+- 🔄 Automatic route generation from file system
+- 🛠️ Development mode with hot reloading
+
+## What's Different from the Original Template?
+
+This version has been modified to remove all front-end rendering capabilities and focus solely on API functionality:
+
+- Removed all client-side React rendering
+- Removed TailwindCSS and other front-end styling
+- Removed SSR (Server Side Rendering) of React components
+- Removed client-side asset bundling
+- Kept the file-based routing system powered by React Router
+- Maintained Express.js integration with hot reloading
 
 ## Getting Started
 
@@ -19,7 +29,7 @@ A modern, production-ready template for building full-stack React applications u
 Install the dependencies:
 
 ```bash
-npm install
+yarn install
 ```
 
 ### Development
@@ -27,46 +37,34 @@ npm install
 Start the development server with HMR:
 
 ```bash
-npm run dev
+yarn dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+Your API will be available at `http://localhost:3000`.
 
 ## Building for Production
 
 Create a production build:
 
 ```bash
-npm run build
+yarn build
 ```
 
 ## Deployment
 
 ### Docker Deployment
 
-This template includes three Dockerfiles optimized for different package managers:
-
-- `Dockerfile` - for npm
-- `Dockerfile.pnpm` - for pnpm
-- `Dockerfile.bun` - for bun
-
-To build and run using Docker:
+This template includes a Dockerfile optimized for yarn:
 
 ```bash
-# For npm
-docker build -t my-app .
-
-# For pnpm
-docker build -f Dockerfile.pnpm -t my-app .
-
-# For bun
-docker build -f Dockerfile.bun -t my-app .
+# Build the image
+docker build -t my-api .
 
 # Run the container
-docker run -p 3000:3000 my-app
+docker run -p 3000:3000 my-api
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+The containerized API can be deployed to any platform that supports Docker, including:
 
 - AWS ECS
 - Google Cloud Run
@@ -77,23 +75,37 @@ The containerized application can be deployed to any platform that supports Dock
 
 ### DIY Deployment
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
+If you're familiar with deploying Node applications, the built-in Express server is production-ready.
 
-Make sure to deploy the output of `npm run build`
+Make sure to deploy the output of `yarn build`:
 
 ```
 ├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
+├── yarn.lock
 ├── server.js
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+└── build/
+    └── server/    # Server-side code
 ```
 
-## Styling
+## File-Based Routing
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+Routes are automatically generated based on the file structure in the `app/routes` directory. Each route file should export the necessary route handlers (loader, action) following the React Router conventions.
+
+Example:
+
+```typescript
+// app/routes/api/users.ts
+export async function loader({ request }: LoaderArgs) {
+  // Handle GET requests
+  return json({ users: [] });
+}
+
+export async function action({ request }: ActionArgs) {
+  // Handle POST, PUT, DELETE requests
+  // ...
+}
+```
 
 ---
 
-Built with ❤️ using React Router.
+Built with React Router and Express.js.
